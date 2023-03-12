@@ -1,0 +1,6 @@
+version: '2'
+services:
+ backend:
+  image: mayari94/test
+  ports:
+  - "8081/8081"
