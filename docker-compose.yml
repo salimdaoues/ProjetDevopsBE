@@ -3,4 +3,4 @@ services:
  backend:
   image: mayari94/test
   ports:
-  - "8081/8081"
+  - "8081:8081"
