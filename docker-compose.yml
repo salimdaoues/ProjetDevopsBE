@@ -1,6 +1,7 @@
 version: '2'
 services:
- backendTest:
-  image: mayari94/test
+ backen:
+  #image: mayari94/test
+  build: .
   ports:
   - "8081:8081"
