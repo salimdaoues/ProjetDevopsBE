@@ -1,7 +1,34 @@
-version: '2'
-services:
- backen:
+#version: '2'
+#services:
+ #backen:
   #image: mayari94/test
-  build: .
+#  build: .
+ # ports:
+  #- "8081:8081"
+
+version: '3'
+services:
+ tp-achat-db:
+  image: mysql:latest
+  restart: always
+  environment:
+   MYSQL_ROOT_PASSWORD: rootpassword
+   MYSQL_DATABASE: tpachato
   ports:
-  - "8081:8081"
+   - "3306:3306"
+  volumes:
+   - ./mysql_data:/var/lib/mysql
+
+ tp-achat-app:
+  build: .
+  image: tpachat-app
+  ports:
+   - "9090:9090"
+  depends_on:
+   - tp-achat-db
+  environment:
+   SPRING_DATASOURCE_URL: jdbc:mysql://tp-achat-db:3306/tpachatdb?useSSL=false
+   SPRING_DATASOURCE_USERNAME: root
+   SPRING_DATASOURCE_PASSWORD: rootpassword
+   SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
+
