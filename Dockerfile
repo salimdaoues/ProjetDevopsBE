@@ -13,7 +13,7 @@ RUN mkdir /app
 WORKDIR /app
 
 # Copier le fichier JAR de l'application dans le répertoire de travail
-COPY target/tpAchatProject-1.0.jar /app
+COPY target/tpAchatProject-1.0.jar /app/tpAchatProject-1.0.jar
 
 # Exposer le port sur lequel l'application s'exécute
 EXPOSE 8082
