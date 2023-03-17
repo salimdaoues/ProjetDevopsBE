@@ -12,7 +12,7 @@ services:
   image: mysql:latest
   restart: always
   environment:
-   MYSQL_ROOT_PASSWORD: root
+   MYSQL_ROOT_PASSWORD:
    MYSQL_DATABASE: tpachato
   ports:
    - "3306:3306"
