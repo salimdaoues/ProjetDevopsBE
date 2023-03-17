@@ -21,7 +21,7 @@ services:
 
  tp-achat-app:
   build: .
-  image: tpachat-app
+  #image: tpachat-app
   ports:
    - "9090:9090"
   depends_on:
