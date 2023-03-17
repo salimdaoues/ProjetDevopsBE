@@ -19,4 +19,4 @@ COPY target/tpAchatProject-1.0.jar /app
 EXPOSE 8082
 
 # Définir la commande à exécuter pour lancer l'application
-CMD ["java", "-jar", "tpachatPorject-1.0.jar"]
+CMD ["java", "-jar", "tpAchatProject-1.0.jar"]
