@@ -12,6 +12,7 @@ services:
   image: mysql:latest
   restart: always
   environment:
+   MYSQL_ROOT_HOST: 172.20.10.6
    MYSQL_ROOT_PASSWORD: rootpassword
    MYSQL_DATABASE: tpachato
   ports:
