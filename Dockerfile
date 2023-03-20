@@ -16,7 +16,7 @@ WORKDIR /app
 COPY target/tpAchatProject-1.0.jar /app/tpAchatProject-1.0.jar
 
 # Exposer le port sur lequel l'application s'exécute
-EXPOSE 9090
+EXPOSE 8089
 
 # Définir la commande à exécuter pour lancer l'application
 CMD ["java", "-jar", "tpAchatProject-1.0.jar"]

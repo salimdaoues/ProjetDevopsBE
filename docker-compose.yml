@@ -22,7 +22,7 @@ services:
   build: .
   #image: tpachat-app
   ports:
-   - "9090:9090"
+   - "8089:8089"
   depends_on:
    - tp-achat-db
   environment:
