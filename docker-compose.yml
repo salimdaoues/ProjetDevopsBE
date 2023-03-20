@@ -28,7 +28,7 @@ services:
    - tp-achat-db
   environment:
    #SPRING_DATASOURCE_URL: jdbc:mysql://tp-achat-db:3306/tpachato?useSSL=false
-   SPRING_DATASOURCE_URL: jdbc:mysql://172.20.10.6:33060/tpachato?useSSL=false&allowPublicKeyRetrieval=true
+   SPRING_DATASOURCE_URL: jdbc:mysql://172.20.10.6:3306/tpachato?useSSL=false&allowPublicKeyRetrieval=true
    SPRING_DATASOURCE_USERNAME: root
    SPRING_DATASOURCE_PASSWORD: rootpassword
    SPRING.JPA.PROPRETIES.HIBERNATE.DIALECT: org.hibernate.dialect.MySQL5Dialect
