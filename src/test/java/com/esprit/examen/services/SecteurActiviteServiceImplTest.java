@@ -2,7 +2,7 @@ package com.esprit.examen.services;
 
 import com.esprit.examen.entities.SecteurActivite;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,8 +19,6 @@ import static org.junit.Assert.assertTrue;
 public class SecteurActiviteServiceImplTest {
     @Autowired
     ISecteurActiviteService secteurActiviteService;
-
-
     @Test
     public void testAddSecteur() throws ParseException {
         SecteurActivite sec = SecteurActivite.builder()
