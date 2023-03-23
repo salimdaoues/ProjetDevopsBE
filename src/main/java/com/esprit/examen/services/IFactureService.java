@@ -7,7 +7,7 @@ import com.esprit.examen.entities.Facture;
 public interface IFactureService {
 	List<Facture> retrieveAllFactures();
 
-	List<Facture> getFacturesByFournisseur(Long idFournisseur);
+	List<Facture> getFacturesByFournisseur(Long idFournisseur) throws NullPointerException;
 
 	Facture addFacture(Facture f);
 
@@ -15,7 +15,7 @@ public interface IFactureService {
 
 	Facture retrieveFacture(Long id);
 	
-	void assignOperateurToFacture(Long idOperateur, Long idFacture);
+	void assignOperateurToFacture(Long idOperateur, Long idFacture) throws NullPointerException;
 
 	float pourcentageRecouvrement(Date startDate, Date endDate);
 
