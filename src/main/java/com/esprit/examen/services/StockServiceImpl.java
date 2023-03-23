@@ -3,6 +3,8 @@ package com.esprit.examen.services;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import com.esprit.examen.entitiesdto.StockDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.Stock;
@@ -70,6 +72,7 @@ public class StockServiceImpl implements IStockService {
 		Date now = new Date();
 		String msgDate = sdf.format(now);
 		String finalMessage= "";
+
 		String newLine = System.getProperty("line.separator");
 		List<Stock> stocksEnRouge = stockRepository.retrieveStatusStock();
 		for (int i = 0; i < stocksEnRouge.size(); i++) {
@@ -77,9 +80,20 @@ public class StockServiceImpl implements IStockService {
 					+ stocksEnRouge.get(i).getLibelleStock() + " a une quantité de " + stocksEnRouge.get(i).getQte()
 					+ " inférieur à la quantité minimale a ne pas dépasser de " + stocksEnRouge.get(i).getQteMin()
 					+ newLine;
+
 		}
 		log.info(finalMessage);
 		return finalMessage;
+	}
+
+	@Override
+	public Stock mapping(StockDTO st) {
+		Stock stock = new Stock();
+		stock.setIdStock(st.getIdStock());
+		stock.setLibelleStock(st.getLibelleStock());
+		stock.setQte(st.getQte());
+		stock.setQteMin(st.getQteMin());
+		return stock;
 	}
 
 }

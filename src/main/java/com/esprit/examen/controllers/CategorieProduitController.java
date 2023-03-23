@@ -2,6 +2,7 @@ package com.esprit.examen.controllers;
 
 import java.util.List;
 
+import com.esprit.examen.entitiesdto.CategorieProduitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,8 +42,8 @@ public class CategorieProduitController {
 	// http://localhost:8089/SpringMVC/categorieProduit/add-categorieProduit
 	@PostMapping("/add-categorieProduit")
 	@ResponseBody
-	public CategorieProduit addCategorieProduit(@RequestBody CategorieProduit cp) {
-		return categorieProduitService.addCategorieProduit(cp);
+	public CategorieProduit addCategorieProduit(@RequestBody CategorieProduitDTO cp) {
+		return categorieProduitService.addCategorieProduit(categorieProduitService.mapping(cp));
 	}
 
 	@DeleteMapping("/remove-categorieProduit/{categorieProduit-id}")
@@ -54,8 +55,8 @@ public class CategorieProduitController {
 	// http://localhost:8089/SpringMVC/categorieProduit/modify-categorieProduit
 	@PutMapping("/modify-categorieProduit")
 	@ResponseBody
-	public CategorieProduit modifyCategorieProduit(@RequestBody CategorieProduit cat) {
-		return categorieProduitService.updateCategorieProduit(cat);
+	public CategorieProduit modifyCategorieProduit(@RequestBody CategorieProduitDTO cat) {
+		return categorieProduitService.updateCategorieProduit(categorieProduitService.mapping(cat));
 	}
 
 	

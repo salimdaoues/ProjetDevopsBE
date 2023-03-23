@@ -1,11 +1,12 @@
 package com.esprit.examen.services;
 
-import java.util.Date;
+
 import java.util.List;
 import javax.transaction.Transactional;
+
+import com.esprit.examen.entitiesdto.ProduitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.esprit.examen.entities.CategorieProduit;
 import com.esprit.examen.entities.Produit;
 import com.esprit.examen.entities.Stock;
 import com.esprit.examen.repositories.CategorieProduitRepository;
@@ -71,6 +72,18 @@ public class ProduitServiceImpl implements IProduitService {
 		}
 
 
+	}
+
+	@Override
+	public Produit mapping(ProduitDTO prod) {
+		Produit produit =new Produit();
+		produit.setIdProduit(prod.getIdProduit());
+		produit.setCodeProduit(prod.getCodeProduit());
+		produit.setDateCreation(prod.getDateCreation());
+		produit.setLibelleProduit(prod.getLibelleProduit());
+		produit.setDateDerniereModification(prod.getDateDerniereModification());
+		produit.setPrix(prod.getPrix());
+		return produit;
 	}
 
 

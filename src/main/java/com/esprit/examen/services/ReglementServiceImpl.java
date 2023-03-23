@@ -3,6 +3,7 @@ package com.esprit.examen.services;
 import java.util.Date;
 import java.util.List;
 
+import com.esprit.examen.entitiesdto.ReglementDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.Reglement;
@@ -42,6 +43,17 @@ public class ReglementServiceImpl implements IReglementService {
 	@Override
 	public float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate) {
 		return reglementRepository.getChiffreAffaireEntreDeuxDate( startDate, endDate);
+	}
+
+	@Override
+	public Reglement mapping(ReglementDTO reg) {
+		Reglement reglement = new Reglement();
+		reglement.setIdReglement(reg.getIdReglement());
+		reglement.setDateReglement(reg.getDateReglement());
+		reglement.setMontantPaye(reg.getMontantPaye());
+		reglement.setPayee(reg.getPayee());
+		reglement.setMontantRestant(reg.getMontantRestant());
+		return reglement;
 	}
 
 }

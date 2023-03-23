@@ -2,13 +2,11 @@ package com.esprit.examen.services;
 
 import java.util.*;
 import javax.transaction.Transactional;
+
+import com.esprit.examen.entities.*;
+import com.esprit.examen.entitiesdto.FactureDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.esprit.examen.entities.DetailFacture;
-import com.esprit.examen.entities.Facture;
-import com.esprit.examen.entities.Fournisseur;
-import com.esprit.examen.entities.Operateur;
-import com.esprit.examen.entities.Produit;
 import com.esprit.examen.repositories.DetailFactureRepository;
 import com.esprit.examen.repositories.FactureRepository;
 import com.esprit.examen.repositories.FournisseurRepository;
@@ -52,7 +50,7 @@ public class FactureServiceImpl implements IFactureService {
 	 * calculer les montants remise et le montant total d'un détail facture
 	 * ainsi que les montants d'une facture
 	 */
-	private Facture addDetailsFacture(Facture f, Set<DetailFacture> detailsFacture) {
+	public Facture addDetailsFacture(Facture f, Set<DetailFacture> detailsFacture) {
 		float montantFacture = 0;
 		float montantRemise = 0;
 		for (DetailFacture detail : detailsFacture) {
@@ -128,6 +126,19 @@ public class FactureServiceImpl implements IFactureService {
 		return 	(totalRecouvrementEntreDeuxDates/totalFacturesEntreDeuxDates)*100;
 
 	}
-	
+
+	@Override
+	public Facture mapping(FactureDTO fac) {
+		Facture persistentfacture = new Facture();
+		persistentfacture.setArchivee(fac.getArchivee());
+		persistentfacture.setMontantFacture(fac.getMontantFacture());
+		persistentfacture.setDateCreationFacture(fac.getDateCreationFacture());
+		persistentfacture.setIdFacture(fac.getIdFacture());
+		persistentfacture.setMontantFacture(fac.getMontantFacture());
+		persistentfacture.setMontantRemise(fac.getMontantRemise());
+		persistentfacture.setDetailsFacture(fac.getDetailsFacture());
+		return persistentfacture;
+	}
+
 
 }

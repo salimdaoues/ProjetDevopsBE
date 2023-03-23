@@ -3,6 +3,7 @@ package com.esprit.examen.controllers;
 import java.util.Date;
 import java.util.List;
 
+import com.esprit.examen.entitiesdto.FactureDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -36,9 +37,10 @@ public class FactureRestController {
 
     @PostMapping("/add-facture")
     @ResponseBody
-    public Facture addFacture(@RequestBody Facture f) {
-        return factureService.addFacture(f);
+    public Facture addFacture(@RequestBody FactureDTO f) {
+        return factureService.addFacture(factureService.mapping(f));
     }
+
 
     /*
      * une facture peut etre annulé si elle a été saisie par erreur Pour ce

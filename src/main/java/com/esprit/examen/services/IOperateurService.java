@@ -2,6 +2,7 @@ package com.esprit.examen.services;
 
 import java.util.List;
 import com.esprit.examen.entities.Operateur;
+import com.esprit.examen.entitiesdto.OperateurDTO;
 
 
 public interface IOperateurService {
@@ -16,4 +17,5 @@ public interface IOperateurService {
 
 	Operateur retrieveOperateur(Long id);
 
+	Operateur mapping(OperateurDTO op);
 }

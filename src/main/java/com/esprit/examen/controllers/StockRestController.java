@@ -4,6 +4,7 @@ package com.esprit.examen.controllers;
 
 import java.util.List;
 
+import com.esprit.examen.entitiesdto.StockDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +39,8 @@ public class StockRestController {
 	// http://localhost:8089/SpringMVC/stock/add-stock
 	@PostMapping("/add-stock")
 	@ResponseBody
-	public Stock addStock(@RequestBody Stock s) {
-		return stockService.addStock(s);
+	public Stock addStock(@RequestBody StockDTO s) {
+		return stockService.addStock(stockService.mapping(s));
 	}
 
 	@DeleteMapping("/remove-stock/{stock-id}")
@@ -51,8 +52,8 @@ public class StockRestController {
 	// http://localhost:8089/SpringMVC/stock/modify-stock
 	@PutMapping("/modify-stock")
 	@ResponseBody
-	public Stock modifyStock(@RequestBody Stock stock) {
-		return stockService.updateStock(stock);
+	public Stock modifyStock(@RequestBody StockDTO stock) {
+		return stockService.updateStock(stockService.mapping(stock));
 	}
 
 	/*

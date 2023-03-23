@@ -2,6 +2,7 @@ package com.esprit.examen.services;
 
 import java.util.List;
 import com.esprit.examen.entities.Produit;
+import com.esprit.examen.entitiesdto.ProduitDTO;
 
 public interface IProduitService {
 
@@ -16,5 +17,7 @@ public interface IProduitService {
 	Produit retrieveProduit(Long id);
 
 	void assignProduitToStock(Long idProduit, Long idStock);
+
+	Produit mapping(ProduitDTO prod);
 
 }

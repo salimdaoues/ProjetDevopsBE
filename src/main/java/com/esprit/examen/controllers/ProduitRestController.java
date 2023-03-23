@@ -1,6 +1,8 @@
 package com.esprit.examen.controllers;
 
 import java.util.List;
+
+import com.esprit.examen.entitiesdto.ProduitDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.examen.entities.Produit;
@@ -32,13 +34,11 @@ public class ProduitRestController {
 		return produitService.retrieveProduit(produitId);
 	}
 
-
 	@PostMapping("/add-produit")
 	@ResponseBody
-	public Produit addProduit(@RequestBody Produit p) {
-		return produitService.addProduit(p);
+	public Produit addProduit(@RequestBody ProduitDTO p) {
+		return produitService.addProduit(produitService.mapping(p));
 	}
-
 
 	@DeleteMapping("/remove-produit/{produit-id}")
 	@ResponseBody
@@ -46,12 +46,12 @@ public class ProduitRestController {
 		produitService.deleteProduit(produitId);
 	}
 
+
 	@PutMapping("/modify-produit")
 	@ResponseBody
-	public Produit modifyProduit(@RequestBody Produit p) {
-		return produitService.updateProduit(p);
+	public Produit modifyProduit(@RequestBody ProduitDTO p) {
+		return produitService.updateProduit(produitService.mapping(p));
 	}
-
 	/*
 	 * Si le responsable magasin souhaite modifier le stock du produit il peut
 	 * le faire en l'affectant au stock en question

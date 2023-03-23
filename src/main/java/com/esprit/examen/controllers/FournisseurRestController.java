@@ -1,6 +1,8 @@
 package com.esprit.examen.controllers;
 
 import java.util.List;
+
+import com.esprit.examen.entitiesdto.FournisseurDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,8 +44,8 @@ public class FournisseurRestController {
 	// http://localhost:8089/SpringMVC/fournisseur/add-fournisseur
 	@PostMapping("/add-fournisseur")
 	@ResponseBody
-	public Fournisseur addFournisseur(@RequestBody Fournisseur f) {
-		return fournisseurService.addFournisseur(f);
+	public Fournisseur addFournisseur(@RequestBody FournisseurDTO f) {
+		return fournisseurService.addFournisseur(fournisseurService.mapping(f));
 	}
 
 	@DeleteMapping("/remove-fournisseur/{fournisseur-id}")
@@ -55,8 +57,8 @@ public class FournisseurRestController {
 	// http://localhost:8089/SpringMVC/fournisseur/modify-fournisseur
 	@PutMapping("/modify-fournisseur")
 	@ResponseBody
-	public Fournisseur modifyFournisseur(@RequestBody Fournisseur fournisseur) {
-		return fournisseurService.updateFournisseur(fournisseur);
+	public Fournisseur modifyFournisseur(@RequestBody FournisseurDTO fournisseur) {
+		return fournisseurService.updateFournisseur(fournisseurService.mapping(fournisseur));
 	}
 
 	// http://localhost:8089/SpringMVC/fournisseur/assignSecteurActiviteToFournisseur/1/5
