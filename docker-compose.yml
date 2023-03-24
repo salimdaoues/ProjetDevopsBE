@@ -1,36 +1,25 @@
-#version: '2'
-#services:
- #backen:
-  #image: mayari94/test
-#  build: .
- # ports:
-  #- "8081:8081"
-
 version: '3'
 services:
- tp-achat-db:
+ db:
   image: mysql:latest
-  restart: always
   environment:
-   MYSQL_ROOT_HOST: 172.20.10.6
-   MYSQL_ROOT_PASSWORD: rootpassword
+   MYSQL_ROOT_PASSWORD: root
    MYSQL_DATABASE: tpachato
   ports:
    - "3306:3306"
   volumes:
-   - ./mysql_data:/var/lib/mysql:rw
+   - 'db_data:/var/lib/mysql:rw'
  tp-achat-app:
   build: .
-  #image: tpachat-app
   ports:
    - "8089:8089"
   depends_on:
-   - tp-achat-db
+   - db
   environment:
-   #SPRING_DATASOURCE_URL: jdbc:mysql://tp-achat-db:3306/tpachato?useSSL=false&allowPublicKeyRetrieval=true
-   SPRING_DATASOURCE_URL: jdbc:mysql://172.20.10.6:3306/tpachato?useSSL=false&allowPublicKeyRetrieval=true
+   SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/tpachato?useSSL=false&allowPublicKeyRetrieval=true
    SPRING_DATASOURCE_USERNAME: root
-   SPRING_DATASOURCE_PASSWORD: rootpassword
-   SPRING.JPA.PROPRETIES.HIBERNATE.DIALECT: org.hibernate.dialect.MySQL5Dialect
-   SPRING_JPA_HIBERNATE_DDL_AUTO: create-drop
-
+   SPRING_DATASOURCE_PASSWORD: root
+   SPRING.JPA.PROPRETIES.HIBERNATE.DIALECT: org.hibernate.dialect.MySQL5InnoDBDialect
+   SPRING_JPA_HIBERNATE_DDL_AUTO: update
+volumes:
+ db_data:
