@@ -14,19 +14,18 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 //@RunWith(SpringRunner.class)
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ActiveProfiles("test")
 @Slf4j
-public class SecteurActiviteServiceImplTest {
+class SecteurActiviteServiceImplTest {
     @Autowired
     ISecteurActiviteService secteurActiviteService;
     @Test
-    public void testSecteur()  {
+    void testSecteur()  {
         SecteurActivite sec = SecteurActivite.builder()
                 .codeSecteurActivite("54860")
                 .libelleSecteurActivite("testé")
@@ -39,7 +38,7 @@ public class SecteurActiviteServiceImplTest {
         F2.setCodeSecteurActivite("1111");
         secteurActiviteService.updateSecteurActivite(F2);
         SecteurActivite F3= secteurActiviteService.retrieveSecteurActivite(F2.getIdSecteurActivite());
-        assertTrue(F3.getCodeSecteurActivite().equals("1111"));
+        assertSame("1111",F3.getCodeSecteurActivite());
         secteurActiviteService.deleteSecteurActivite(F2.getIdSecteurActivite());
 
     }

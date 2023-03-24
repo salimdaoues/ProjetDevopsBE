@@ -15,22 +15,22 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @ActiveProfiles("test")
 @Slf4j
-public class StockServiceImplTest {
+ class StockServiceImplTest {
     @Autowired
     IStockService stockService;
 
     @Test
-    public void testAddStock() {
-        Stock s = new Stock("test",545,98);
+    void testAddStock() {
+        Stock s = new Stock("test",5,98);
         Stock savedStock= stockService.addStock(s);
         assertSame(98, savedStock.getQteMin());
-        assertTrue( savedStock.getQte()==545);
+        assertSame( 5, savedStock.getQte());
         assertNotNull(savedStock.getLibelleStock());
         stockService.deleteStock(savedStock.getIdStock());
     }
 
     @Test
-    public void testUpdatestock() {
+    void testUpdatestock() {
 
         Stock s = new Stock("test2",78,98);
         Stock s2= stockService.addStock(s);
@@ -41,14 +41,14 @@ public class StockServiceImplTest {
     }
 
     @Test
-    public void testDeleteStock() {
+    void testDeleteStock() {
         Stock s = new Stock("test3",44,511);
         Stock savedStock= stockService.addStock(s);
         stockService.deleteStock(savedStock.getIdStock());
         assertNull(stockService.retrieveStock(savedStock.getIdStock()));
     }
     @Test
-    public void testretrieveallstocks() {
+    void testretrieveallstocks() {
         int expected = stockService.retrieveAllStocks().size();
         Stock s = new Stock("test4",68,695);
         Stock savedStock= stockService.addStock(s);
