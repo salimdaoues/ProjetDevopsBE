@@ -32,7 +32,7 @@ services:
    #SPRING_DATASOURCE_URL: jdbc:mysql://172.20.10.6:3306/tpachato?useSSL=false&allowPublicKeyRetrieval=true
    SPRING_DATASOURCE_USERNAME: root
    SPRING_DATASOURCE_PASSWORD: root
-   SPRING.JPA.PROPRETIES.HIBERNATE.DIALECT: org.hibernate.dialect.MySQL5Dialect
+   SPRING.JPA.PROPRETIES.HIBERNATE.DIALECT: org.hibernate.dialect.MySQL5InnoDBDialect
    SPRING_JPA_HIBERNATE_DDL_AUTO: create
 volumes:
  db_data:
