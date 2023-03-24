@@ -16,15 +16,10 @@ services:
   depends_on:
    - db
   environment:
-   SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/tpachato?useSSL=false&allowPublicKeyRetrieval=true
+   SPRING_DATASOURCE_URL: jdbc:mysql://172.20.10.6:3306/tpachato?useSSL=false&allowPublicKeyRetrieval=true
    SPRING_DATASOURCE_USERNAME: root
    SPRING_DATASOURCE_PASSWORD: root
    SPRING.JPA.PROPRETIES.HIBERNATE.DIALECT: org.hibernate.dialect.MySQL5InnoDBDialect
    SPRING_JPA_HIBERNATE_DDL_AUTO: update
-  networks:
-   - tp-achat-network
 volumes:
  db_data:
-networks:
- tp-achat-network:
-  driver: bridge
