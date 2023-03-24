@@ -19,7 +19,7 @@ services:
    - "3306:3306"
   volumes:
    #- ./mysql_data:/var/lib/mysql:rw
-   - db_data: /var/lib/mysql:rw
+   - 'db_data: /var/lib/mysql:rw'
  tp-achat-app:
   build: .
   #image: tpachat-app
