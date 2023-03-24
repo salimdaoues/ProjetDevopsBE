@@ -33,7 +33,7 @@ services:
    SPRING_DATASOURCE_USERNAME: root
    SPRING_DATASOURCE_PASSWORD: root
    SPRING.JPA.PROPRETIES.HIBERNATE.DIALECT: org.hibernate.dialect.MySQL5InnoDBDialect
-   SPRING_JPA_HIBERNATE_DDL_AUTO: create
+   SPRING_JPA_HIBERNATE_DDL_AUTO: update
 volumes:
  db_data:
 

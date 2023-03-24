@@ -39,7 +39,6 @@ import static org.junit.Assert.*;
         assertTrue(stock.getQteMin()>10);
         stockService.deleteStock(s2.getIdStock());
     }
-
     @Test
     void testDeleteStock() {
         Stock s = new Stock("test3",44,511);
