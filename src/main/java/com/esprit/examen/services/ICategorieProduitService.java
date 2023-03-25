@@ -3,6 +3,7 @@ package com.esprit.examen.services;
 import java.util.List;
 
 import com.esprit.examen.entities.CategorieProduit;
+import com.esprit.examen.entitiesdto.CategorieProduitDTO;
 
 
 public interface ICategorieProduitService {
@@ -16,5 +17,7 @@ public interface ICategorieProduitService {
 	CategorieProduit updateCategorieProduit(CategorieProduit cp);
 
 	CategorieProduit retrieveCategorieProduit(Long id);
+
+	CategorieProduit mapping(CategorieProduitDTO cat );
 
 }

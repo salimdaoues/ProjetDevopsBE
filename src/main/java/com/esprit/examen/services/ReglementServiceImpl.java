@@ -3,9 +3,9 @@ package com.esprit.examen.services;
 import java.util.Date;
 import java.util.List;
 
+import com.esprit.examen.entitiesdto.ReglementDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Reglement;
 import com.esprit.examen.repositories.FactureRepository;
 import com.esprit.examen.repositories.ReglementRepository;
@@ -30,24 +30,30 @@ public class ReglementServiceImpl implements IReglementService {
 
 	@Override
 	public Reglement retrieveReglement(Long id) {
-		Reglement reglement = reglementRepository.findById(id).orElse(null);
-		
-		return reglement;
+		return reglementRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public List<Reglement> retrieveReglementByFacture(Long idFacture) {
-		List<Reglement> reglements= reglementRepository.retrieveReglementByFacture(idFacture);
-		return reglements;
+		return reglementRepository.retrieveReglementByFacture(idFacture);
 		
 //		ou bien(Sans JPQL)
-//		Facture f= factureRepository.findById(idFacture).get();
-//		return (List<Reglement>) f.getReglements();
 	}
 
 	@Override
 	public float getChiffreAffaireEntreDeuxDate(Date startDate, Date endDate) {
 		return reglementRepository.getChiffreAffaireEntreDeuxDate( startDate, endDate);
+	}
+
+	@Override
+	public Reglement mapping(ReglementDTO reg) {
+		Reglement reglement = new Reglement();
+		reglement.setIdReglement(reg.getIdReglement());
+		reglement.setDateReglement(reg.getDateReglement());
+		reglement.setMontantPaye(reg.getMontantPaye());
+		reglement.setPayee(reg.getPayee());
+		reglement.setMontantRestant(reg.getMontantRestant());
+		return reglement;
 	}
 
 }

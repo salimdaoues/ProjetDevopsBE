@@ -2,6 +2,7 @@ package com.esprit.examen.services;
 
 import java.util.List;
 
+import com.esprit.examen.entitiesdto.OperateurDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.Operateur;
@@ -30,15 +31,24 @@ public class OperateurServiceImpl implements IOperateurService {
 	}
 
 	@Override
-	public Operateur updateOperateur(Operateur o) {
-		operateurRepository.save(o);
-		return o;
+	public Operateur updateOperateur(Operateur o2) {
+		operateurRepository.save(o2);
+		return o2;
 	}
 
 	@Override
 	public Operateur retrieveOperateur(Long id) {
-		Operateur operateur = operateurRepository.findById(id).orElse(null);
-		return operateur;
+		return operateurRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public Operateur mapping(OperateurDTO op) {
+		Operateur operateur = new Operateur();
+		operateur.setIdOperateur(op.getIdOperateur());
+		operateur.setNom(op.getNom());
+		operateur.setPrenom(op.getPrenom());
+	    operateur.setPassword(op.getPassword());
+	    return operateur;
 	}
 
 }

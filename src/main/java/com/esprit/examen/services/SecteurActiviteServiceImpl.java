@@ -2,6 +2,7 @@ package com.esprit.examen.services;
 
 import java.util.List;
 
+import com.esprit.examen.entitiesdto.SecteurActiviteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.esprit.examen.entities.SecteurActivite;
@@ -30,15 +31,23 @@ public class SecteurActiviteServiceImpl implements ISecteurActiviteService{
 	}
 
 	@Override
-	public SecteurActivite updateSecteurActivite(SecteurActivite sa) {
-		secteurActiviteRepository.save(sa);
-		return sa;
+	public SecteurActivite updateSecteurActivite(SecteurActivite sa2) {
+		secteurActiviteRepository.save(sa2);
+		return sa2;
 	}
 
 	@Override
 	public SecteurActivite retrieveSecteurActivite(Long id) {
-		SecteurActivite secteurActivite = secteurActiviteRepository.findById(id).orElse(null);
-		return secteurActivite;
+		return secteurActiviteRepository.findById(id).orElse(null);
+	}
+
+	@Override
+	public SecteurActivite mapping(SecteurActiviteDTO sec) {
+		SecteurActivite secteur = new SecteurActivite();
+		secteur.setIdSecteurActivite(sec.getIdSecteurActivite());
+		secteur.setCodeSecteurActivite(sec.getCodeSecteurActivite());
+		secteur.setLibelleSecteurActivite(sec.getLibelleSecteurActivite());
+		return secteur;
 	}
 
 }
