@@ -8,6 +8,12 @@
 
 version: '3'
 services:
+ front:
+  image: ../devOPsFEv2
+  ports:
+   - "4200:4200"
+  depends_on:
+   - tp-achat-app
  db:
   image: mysql:latest
   #restart: always
