@@ -9,7 +9,7 @@
 version: '3'
 services:
  front:
-  image: ../devOPsFEv2
+  build: ../devOPsFEv2
   ports:
    - "4200:4200"
   depends_on:
