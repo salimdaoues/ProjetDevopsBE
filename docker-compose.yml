@@ -13,7 +13,7 @@ services:
   ports:
    - "4200:4200"
   depends_on:
-   - tp-achat-app
+   - back
  db:
   image: mysql:latest
   #restart: always
@@ -26,7 +26,7 @@ services:
   volumes:
    #- ./mysql_data:/var/lib/mysql:rw
    - 'db_data:/var/lib/mysql:rw'
- tp-achat-app:
+ back:
   build: .
   #image: tpachat-app
   ports:
