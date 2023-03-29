@@ -20,18 +20,18 @@ import java.util.Optional;
 @SpringBootTest
 @ActiveProfiles("test")
 @Slf4j
-public class FournisseurServiceImplTest {
+ class FournisseurServiceImplTest {
     @Autowired
     private IFournisseurService fournisseurService;
 
     @Test
-    public void testRetrieveAllFournisseurs() {
+     void testRetrieveAllFournisseurs() {
         List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
         Assert.assertNotNull(fournisseurs);
     }
 
     @Test
-    public Fournisseur testAddFournisseur() {
+     Fournisseur testAddFournisseur() {
         Fournisseur fournisseur = new Fournisseur();
         fournisseur.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
         fournisseur.setCode("FOURN01");
@@ -48,13 +48,13 @@ public class FournisseurServiceImplTest {
     }
 
     @Test
-    public void testRetrieveFournisseur() {
+     void testRetrieveFournisseur() {
         Fournisseur retrievedFournisseur = fournisseurService.retrieveFournisseur(testAddFournisseur().getIdFournisseur());
         Assert.assertNotNull(retrievedFournisseur);
     }
 
     @Test
-    public void testUpdateFournisseur() {
+     void testUpdateFournisseur() {
         Fournisseur persistedFournisseur = testAddFournisseur();
         persistedFournisseur.getDetailFournisseur().setAdresse("Nouvelle adresse");
         Fournisseur updatedFournisseur = fournisseurService.updateFournisseur(persistedFournisseur);
@@ -62,7 +62,7 @@ public class FournisseurServiceImplTest {
     }
 
     @Test
-    public void testDeleteFournisseur() {
+     void testDeleteFournisseur() {
         Fournisseur persistedFournisseur = testAddFournisseur();
         fournisseurService.deleteFournisseur(persistedFournisseur.getIdFournisseur());
         Optional<Fournisseur> deletedFournisseur = Optional.ofNullable(fournisseurService.retrieveFournisseur(persistedFournisseur.getIdFournisseur()));
