@@ -4,7 +4,7 @@ import com.esprit.examen.entities.CategorieProduit;
 import com.esprit.examen.entities.Produit;
 import com.esprit.examen.repositories.CategorieProduitRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.Test.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class CategorieProduitImplTest {
     private CategorieProduitRepository categorieProduitRepository;
 
     @Autowired
-ICategorieProduitService categorieProduitService;
+    ICategorieProduitService categorieProduitService;
     @Test
     public void testRetrieveAllCategorieProduitsReturnsCorrectData() {
         CategorieProduit cat1 = new CategorieProduit( "makeup");
@@ -36,13 +36,17 @@ ICategorieProduitService categorieProduitService;
         List<CategorieProduit> CategorieProduits = new ArrayList<>();
         CategorieProduits.add(cat1);
         CategorieProduits.add(cat2);
-        when(categorieProduitService.retrieveAllCategorieProduits()).thenReturn(CategorieProduits);
+        categorieProduitService.addCategorieProduit(cat1);
+        categorieProduitService.addCategorieProduit(cat2);
         List<CategorieProduit> actualcatProduits = categorieProduitService.retrieveAllCategorieProduits();
 
         // Assert
         assertEquals(CategorieProduits.size(), actualcatProduits.size());
-        assertEquals(cat1.getLibelleCategorie(),actualcatProduits.get(0).getIdCategorieProduit());
-        assertEquals(cat2.getLibelleCategorie(), actualcatProduits.get(1).getIdCategorieProduit());
+        assertTrue(cat1.getIdCategorieProduit()==actualcatProduits.get(0).getIdCategorieProduit());
+        assertTrue(cat2.getIdCategorieProduit()==actualcatProduits.get(1).getIdCategorieProduit());
+        categorieProduitService.deleteCategorieProduit(cat1.getIdCategorieProduit());
+        categorieProduitService.deleteCategorieProduit(cat2.getIdCategorieProduit());
+
 
 
     }

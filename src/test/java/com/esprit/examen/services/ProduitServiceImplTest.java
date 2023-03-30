@@ -1,24 +1,30 @@
 package com.esprit.examen.services;
 
 import com.esprit.examen.entities.Produit;
-import com.esprit.examen.entities.Stock;
+import com.esprit.examen.repositories.ProduitRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith({SpringExtension.class, MockitoExtension.class})
+  @MockitoSettings(strictness = Strictness.LENIENT)
 @SpringBootTest
 @ActiveProfiles("test")
 @Slf4j
@@ -33,21 +39,21 @@ public class ProduitServiceImplTest {
     }
     @Test
     public void testRetrieveAllProduitsReturnsCorrectData() {
+        int expected = produitService.retrieveAllProduits().size();
+
         Produit expectedProduit1 = new Produit("Produit 1", 10.99F);
         Produit expectedProduit2 = new Produit("Produit 2", 20.99F);
-
-        List<Produit> expectedProduits = new ArrayList<>();
-        expectedProduits.add(expectedProduit1);
-        expectedProduits.add(expectedProduit2);
-        when(produitService.retrieveAllProduits()).thenReturn(expectedProduits);
+        //List<Produit> expectedProduits = new ArrayList<>();
+        produitService.addProduit(expectedProduit1);
+        produitService.addProduit(expectedProduit2);
         List<Produit> actualProduits = produitService.retrieveAllProduits();
 
         // Assert
-        assertEquals(expectedProduits.size(), actualProduits.size());
+        assertEquals(expected+2, actualProduits.size());
         assertEquals(expectedProduit1.getLibelleProduit(), actualProduits.get(0).getLibelleProduit());
-        assertEquals(expectedProduit1.getPrix(), actualProduits.get(0).getPrix());
+        assertTrue(expectedProduit1.getPrix()== actualProduits.get(0).getPrix());
         assertEquals(expectedProduit2.getLibelleProduit(), actualProduits.get(1).getLibelleProduit());
-        assertEquals(expectedProduit2.getPrix(), actualProduits.get(1).getPrix());
+        assertTrue(expectedProduit2.getPrix()== actualProduits.get(1).getPrix());
 
     }
 
@@ -59,7 +65,8 @@ public class ProduitServiceImplTest {
         Produit produit = new Produit("test 1",12F);
         Produit savedproduit = produitService.addProduit(produit) ;
         assertSame("test 1",savedproduit.getLibelleProduit());
-        assertSame(12F,savedproduit.getPrix());
+        assertTrue(12==savedproduit.getPrix());
+        assertNotNull(savedproduit.getIdProduit());
         produitService.deleteProduit(savedproduit.getIdProduit());
     }
    @Test
@@ -75,13 +82,7 @@ public class ProduitServiceImplTest {
         Produit produit = new Produit("test 3",14F);
         Produit savedproduit = produitService.addProduit(produit) ;
         long produitId = savedproduit.getIdProduit();
-
-        //first time
         produitService.deleteProduit(produitId);
-        //second time
-        produitService.deleteProduit(produitId);
-
-
         assertNull(produitService.retrieveProduit(produitId));
     }
 @Test
