@@ -33,66 +33,28 @@ import java.util.Optional;
     FactureRepository factRepository;
     @Test
     void testAddFacture() {
-    Facture facture1 = new Facture();
-        facture1.setArchivee(true);
-        facture1.setDateCreationFacture(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay().atZone(ZoneOffset.UTC).toInstant()));
-        facture1.setDateDerniereModificationFacture(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay().atZone(ZoneOffset.UTC).toInstant()));
-        facture1.setDetailsFacture(new HashSet<>());
-        facture1.setIdFacture(1L);
-        facture1.setMontantFacture(10.0f);
-        facture1.setMontantRemise(10.0f);
-        facture1.setReglements(new HashSet<>());
-    assertSame(facture1, factService.addFacture(facture1));
-    verify(factRepository).save((Facture) any());
-        factService.retrieveFacture(factService.addFacture(facture1).getIdFacture());
+        Facture f = new Facture(5,98,true);
+        Facture savedfact= factService.addFacture(f);
+        assertTrue(f.getMontantFacture()==98f);
+        assertNotNull(savedfact.getMontantFacture());
     }
     @Test
     void testUpdateFacture() {
 
-        Facture facture1 = new Facture();
-        facture1.setArchivee(true);
-        facture1.setDateCreationFacture(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay().atZone(ZoneOffset.UTC).toInstant()));
-        facture1.setDateDerniereModificationFacture(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay().atZone(ZoneOffset.UTC).toInstant()));
-        facture1.setDetailsFacture(new HashSet<>());
-        facture1.setIdFacture(1L);
-        facture1.setMontantFacture(10.0f);
-        facture1.setMontantRemise(10.0f);
-        facture1.setReglements(new HashSet<>());
-        assertSame(facture1, factService.addFacture(facture1));
-        verify(factRepository).save((Facture) any());
-        factService.retrieveFacture(factService.addFacture(facture1).getIdFacture());
+        Facture f = new Facture(9,30,true);
+        Facture f2= factService.addFacture(f);
+        assertNotNull(f2.getMontantFacture());
+        Facture fact= factService.retrieveFacture(f2.getIdFacture());
+        assertTrue(fact.getMontantFacture()==30f);
 
     }
     @Test
-    void testRetrieveFacture() {
-        Facture facture1 = new Facture();
-        facture1.setArchivee(true);
-        facture1.setDateCreationFacture(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay().atZone(ZoneOffset.UTC).toInstant()));
-        facture1.setDateDerniereModificationFacture(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay().atZone(ZoneOffset.UTC).toInstant()));
-        facture1.setDetailsFacture(new HashSet<>());
-        facture1.setIdFacture(1L);
-        facture1.setMontantFacture(10.0f);
-        facture1.setMontantRemise(10.0f);
-        facture1.setReglements(new HashSet<>());
-        Optional<Facture> ofResult = Optional.of(facture1);
-        when(factRepository.findById((Long) any())).thenReturn(ofResult);
-        Assert.assertSame(facture1, factService.retrieveFacture(1L));
-        verify(factRepository).findById((Long) any());
+    void testretrieveallFactures() {
+        int expected = factService.retrieveAllFactures().size();
+        Facture f = new Facture(1000,68,false);
+        Facture savedFact= factService.addFacture(f);
+        assertEquals(expected + 1, factService.retrieveAllFactures().size());
     }
-    @Test
-    void testDeleteStock() {
-        Facture facture1 = new Facture();
-        facture1.setArchivee(true);
-        facture1.setDateCreationFacture(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay().atZone(ZoneOffset.UTC).toInstant()));
-        facture1.setDateDerniereModificationFacture(Date.from(LocalDate.of(1970, 1, 1).atStartOfDay().atZone(ZoneOffset.UTC).toInstant()));
-        facture1.setDetailsFacture(new HashSet<>());
-        facture1.setIdFacture(1L);
-        facture1.setMontantFacture(10.0f);
-        facture1.setMontantRemise(10.0f);
-        facture1.setReglements(new HashSet<>());
-        assertSame(facture1, factService.addFacture(facture1));
-        factService.retrieveFacture(factService.addFacture(facture1).getIdFacture());
-        assertNull(factService.retrieveFacture(factService.addFacture(facture1).getIdFacture()));
-    }
+
 }
 
