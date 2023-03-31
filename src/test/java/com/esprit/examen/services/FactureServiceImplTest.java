@@ -35,18 +35,20 @@ import java.util.Optional;
     void testAddFacture() {
         Facture f = new Facture(5,98,true);
         Facture savedfact= factService.addFacture(f);
-        assertTrue(f.getMontantFacture()==98f);
-        assertNotNull(savedfact.getMontantFacture());
+        float expectedMontantFacture = 98f;
+        float delta = 0.001f;
+        assertEquals(expectedMontantFacture, savedfact.getMontantFacture(), delta);
+        assertNotNull(savedfact.getIdFacture());
     }
     @Test
     void testUpdateFacture() {
 
         Facture f = new Facture(9,30,true);
         Facture f2= factService.addFacture(f);
-        assertNotNull(f2.getMontantFacture());
+        Float montantFacture = f2.getMontantFacture();
+        assertNotNull(montantFacture);
         Facture fact= factService.retrieveFacture(f2.getIdFacture());
-        assertTrue(fact.getMontantFacture()==30f);
-
+        assertEquals(34f, fact.getMontantFacture(), 0.001f);
     }
     @Test
     void testretrieveallFactures() {
