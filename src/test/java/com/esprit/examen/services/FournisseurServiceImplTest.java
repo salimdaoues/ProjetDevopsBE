@@ -28,6 +28,7 @@ import java.util.Optional;
      void testRetrieveAllFournisseurs() {
         List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
         Assert.assertNotNull(fournisseurs);
+
     }
 
     @Test
