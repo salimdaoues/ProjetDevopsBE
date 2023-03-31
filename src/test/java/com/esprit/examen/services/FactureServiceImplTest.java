@@ -40,6 +40,14 @@ import java.util.Optional;
         assertEquals(expectedMontantFacture, savedfact.getMontantFacture(), delta);
         assertNotNull(savedfact.getIdFacture());
     }
+
+    @Test
+    void testretrieveallFactures() {
+        int expected = factService.retrieveAllFactures().size();
+        Facture f = new Facture(1000,68,false);
+        Facture savedFact= factService.addFacture(f);
+        assertEquals(expected + 1, factService.retrieveAllFactures().size());
+    }
     @Test
     void testUpdateFacture() {
 
@@ -50,13 +58,5 @@ import java.util.Optional;
         Facture fact= factService.retrieveFacture(f2.getIdFacture());
         assertEquals(30f, fact.getMontantFacture(), 0.001f);
     }
-    @Test
-    void testretrieveallFactures() {
-        int expected = factService.retrieveAllFactures().size();
-        Facture f = new Facture(1000,68,false);
-        Facture savedFact= factService.addFacture(f);
-        assertEquals(expected + 1, factService.retrieveAllFactures().size());
-    }
-
 }
 
