@@ -38,6 +38,13 @@ public class Produit implements Serializable {
 	private Date dateCreation;
 	@Temporal(TemporalType.DATE)
 	private Date dateDerniereModification;
+
+
+	public Produit(String libelleProduit, float prix) {
+		this.libelleProduit = libelleProduit;
+		this.prix = prix;
+	}
+
 	@ManyToOne
 	@JsonIgnore
 	private Stock stock;

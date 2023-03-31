@@ -76,7 +76,7 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Override
 	public Produit mapping(ProduitDTO prod) {
-		Produit produit =new Produit();
+		Produit produit =new Produit("Produit 1", 10.99F);
 		produit.setIdProduit(prod.getIdProduit());
 		produit.setCodeProduit(prod.getCodeProduit());
 		produit.setDateCreation(prod.getDateCreation());
