@@ -9,6 +9,8 @@ services:
       - "3306:3306"
     volumes:
       - 'db_data:/var/lib/mysql:rw'
+    networks:
+      - networkfrontback
   tp-achat-app:
     build: .
     ports:
@@ -21,5 +23,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: root
       SPRING.JPA.PROPRETIES.HIBERNATE.DIALECT: org.hibernate.dialect.MySQL5InnoDBDialect
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    networks:
+      - networkfrontback
 volumes:
   db_data:
