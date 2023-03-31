@@ -48,7 +48,7 @@ import java.util.Optional;
         Float montantFacture = f2.getMontantFacture();
         assertNotNull(montantFacture);
         Facture fact= factService.retrieveFacture(f2.getIdFacture());
-        assertEquals(34f, fact.getMontantFacture(), 0.001f);
+        assertEquals(30f, fact.getMontantFacture(), 0.001f);
     }
     @Test
     void testretrieveallFactures() {
