@@ -22,14 +22,14 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 @ActiveProfiles("test")
 @Slf4j
-public class CategorieProduitImplTest {
+ class CategorieProduitImplTest {
     @Autowired
     private CategorieProduitRepository categorieProduitRepository;
 
     @Autowired
     ICategorieProduitService categorieProduitService;
     @Test
-    public void testRetrieveAllCategorieProduitsReturnsCorrectData() {
+     void testRetrieveAllCategorieProduitsReturnsCorrectData() {
         CategorieProduit cat1 = new CategorieProduit( "makeup");
         CategorieProduit cat2 = new CategorieProduit("food");
 
@@ -42,8 +42,8 @@ public class CategorieProduitImplTest {
 
         // Assert
         assertEquals(CategorieProduits.size(), actualcatProduits.size());
-        assertTrue(cat1.getIdCategorieProduit()==actualcatProduits.get(0).getIdCategorieProduit());
-        assertTrue(cat2.getIdCategorieProduit()==actualcatProduits.get(1).getIdCategorieProduit());
+        assertEquals(cat1.getIdCategorieProduit(),actualcatProduits.get(0).getIdCategorieProduit());
+        assertEquals(cat2.getIdCategorieProduit(),actualcatProduits.get(1).getIdCategorieProduit());
         categorieProduitService.deleteCategorieProduit(cat1.getIdCategorieProduit());
         categorieProduitService.deleteCategorieProduit(cat2.getIdCategorieProduit());
 
@@ -51,7 +51,7 @@ public class CategorieProduitImplTest {
 
     }
     @Test
-    public void testUpdateCategorieProduit() {
+     void testUpdateCategorieProduit() {
 
         CategorieProduit catproduit = new CategorieProduit("test 1");
         CategorieProduit addedCat = categorieProduitService.addCategorieProduit(catproduit);
@@ -66,7 +66,7 @@ public class CategorieProduitImplTest {
     }
 
     @Test
-    public void TestdeleteProduit(){
+     void TestdeleteProduit(){
         CategorieProduit catproduit = new CategorieProduit("test 2");
         CategorieProduit savedcatproduit = categorieProduitService.addCategorieProduit(catproduit);
         categorieProduitService.deleteCategorieProduit(savedcatproduit.getIdCategorieProduit());

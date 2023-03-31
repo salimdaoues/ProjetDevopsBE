@@ -4,6 +4,7 @@ import com.esprit.examen.entities.Produit;
 import com.esprit.examen.repositories.ProduitRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -28,17 +29,17 @@ import java.util.List;
 @SpringBootTest
 @ActiveProfiles("test")
 @Slf4j
-public class ProduitServiceImplTest {
+ class ProduitServiceImplTest {
     @Autowired
     private IProduitService produitService;
 
     @Test
-    public void TestretrieveAllProduits(){
+     void TestretrieveAllProduits(){
         List<Produit> produits= produitService.retrieveAllProduits();
         Assert.assertNotNull(produits);
     }
     @Test
-    public void testRetrieveAllProduitsReturnsCorrectData() {
+     void testRetrieveAllProduitsReturnsCorrectData() {
         int expected = produitService.retrieveAllProduits().size();
 
         Produit expectedProduit1 = new Produit("Produit 1", 10.99F);
@@ -51,9 +52,9 @@ public class ProduitServiceImplTest {
         // Assert
         assertEquals(expected+2, actualProduits.size());
         assertEquals(expectedProduit1.getLibelleProduit(), actualProduits.get(0).getLibelleProduit());
-        assertTrue(expectedProduit1.getPrix()== actualProduits.get(0).getPrix());
+        Assertions.assertEquals(expectedProduit1.getPrix(),actualProduits.get(0).getPrix());
         assertEquals(expectedProduit2.getLibelleProduit(), actualProduits.get(1).getLibelleProduit());
-        assertTrue(expectedProduit2.getPrix()== actualProduits.get(1).getPrix());
+        Assertions.assertEquals(expectedProduit2.getPrix(), actualProduits.get(1).getPrix());
 
     }
 
@@ -61,16 +62,16 @@ public class ProduitServiceImplTest {
 
 
    @Test
-   public void TestaddProduit(){
+    void TestaddProduit(){
         Produit produit = new Produit("test 1",12F);
         Produit savedproduit = produitService.addProduit(produit) ;
         assertSame("test 1",savedproduit.getLibelleProduit());
-        assertTrue(12==savedproduit.getPrix());
+        Assertions.assertEquals(produit.getPrix(),savedproduit.getPrix());
         assertNotNull(savedproduit.getIdProduit());
         produitService.deleteProduit(savedproduit.getIdProduit());
     }
    @Test
-   public void TestdeleteProduit(){
+    void TestdeleteProduit(){
        Produit produit = new Produit("test 2",13F);
        Produit savedproduit = produitService.addProduit(produit) ;
        produitService.deleteProduit(savedproduit.getIdProduit());
@@ -78,7 +79,7 @@ public class ProduitServiceImplTest {
    }
 
     @Test
-    public void testDeleteNonexistentProduit() {
+     void testDeleteNonexistentProduit() {
         Produit produit = new Produit("test 3",14F);
         Produit savedproduit = produitService.addProduit(produit) ;
         long produitId = savedproduit.getIdProduit();
@@ -86,7 +87,7 @@ public class ProduitServiceImplTest {
         assertNull(produitService.retrieveProduit(produitId));
     }
 @Test
-     public void TestupdateProduit(){
+      void TestupdateProduit(){
         Produit produit = new Produit("test 4",15F);
         Produit p1= produitService.addProduit(produit);
         assertNotNull(p1.getIdProduit());
