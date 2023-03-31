@@ -31,7 +31,6 @@ class SecteurActiviteServiceImplTest {
                 .libelleSecteurActivite("testé")
                 .build();
         SecteurActivite F2 = secteurActiviteService.addSecteurActivite(sec);
-        System.out.print("SecteurActivite " + F2);
         Assertions.assertNotNull(F2.getIdSecteurActivite());
         assertNotNull(F2.getCodeSecteurActivite());
         assertTrue(F2.getLibelleSecteurActivite().length() > 0);
