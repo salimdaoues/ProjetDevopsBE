@@ -29,19 +29,7 @@ class FournisseurServiceImplTest {
       List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
       Assert.assertNotNull(fournisseurs);
    }
-   Fournisseur createFournisseur(){
-      Fournisseur fournisseur = new Fournisseur();
-      fournisseur.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
-      fournisseur.setCode("FOURN01");
-      fournisseur.setLibelle("Fournisseur 1");
-      DetailFournisseur detailFournisseur = new DetailFournisseur();
-      detailFournisseur.setAdresse("Rue du Commerce");
-      detailFournisseur.setEmail("fournisseur1@fournisseur.com");
-      detailFournisseur.setMatricule("MAT001");
-      fournisseur.setDetailFournisseur(detailFournisseur);
-      Fournisseur persistedFournisseur = fournisseurService.addFournisseur(fournisseur);
-      return persistedFournisseur;
-   }
+
    @Test
    void testAddFournisseur() {
       Fournisseur fournisseur = new Fournisseur();
@@ -78,5 +66,18 @@ class FournisseurServiceImplTest {
       fournisseurService.deleteFournisseur(persistedFournisseur.getIdFournisseur());
       Optional<Fournisseur> deletedFournisseur = Optional.ofNullable(fournisseurService.retrieveFournisseur(persistedFournisseur.getIdFournisseur()));
       Assert.assertFalse(deletedFournisseur.isPresent());
+   }
+   Fournisseur createFournisseur(){
+      Fournisseur fournisseur = new Fournisseur();
+      fournisseur.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+      fournisseur.setCode("FOURN01");
+      fournisseur.setLibelle("Fournisseur 1");
+      DetailFournisseur detailFournisseur = new DetailFournisseur();
+      detailFournisseur.setAdresse("Rue du Commerce");
+      detailFournisseur.setEmail("fournisseur1@fournisseur.com");
+      detailFournisseur.setMatricule("MAT001");
+      fournisseur.setDetailFournisseur(detailFournisseur);
+      Fournisseur persistedFournisseur = fournisseurService.addFournisseur(fournisseur);
+      return persistedFournisseur;
    }
 }
