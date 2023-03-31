@@ -29,9 +29,21 @@ import java.util.Optional;
         List<Fournisseur> fournisseurs = fournisseurService.retrieveAllFournisseurs();
         Assert.assertNotNull(fournisseurs);
     }
-
+ Fournisseur createFournisseur(){
+    Fournisseur fournisseur = new Fournisseur();
+    fournisseur.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
+    fournisseur.setCode("FOURN01");
+    fournisseur.setLibelle("Fournisseur 1");
+    DetailFournisseur detailFournisseur = new DetailFournisseur();
+    detailFournisseur.setAdresse("Rue du Commerce");
+    detailFournisseur.setEmail("fournisseur1@fournisseur.com");
+    detailFournisseur.setMatricule("MAT001");
+    fournisseur.setDetailFournisseur(detailFournisseur);
+    Fournisseur persistedFournisseur = fournisseurService.addFournisseur(fournisseur);
+       return persistedFournisseur;
+ }
     @Test
-     Fournisseur testAddFournisseur() {
+     void testAddFournisseur() {
         Fournisseur fournisseur = new Fournisseur();
         fournisseur.setCategorieFournisseur(CategorieFournisseur.ORDINAIRE);
         fournisseur.setCode("FOURN01");
@@ -44,18 +56,17 @@ import java.util.Optional;
         Fournisseur persistedFournisseur = fournisseurService.addFournisseur(fournisseur);
         Assert.assertNotNull(persistedFournisseur);
         Assert.assertNotNull(persistedFournisseur.getIdFournisseur());
-        return persistedFournisseur;
     }
 
     @Test
      void testRetrieveFournisseur() {
-        Fournisseur retrievedFournisseur = fournisseurService.retrieveFournisseur(testAddFournisseur().getIdFournisseur());
+        Fournisseur retrievedFournisseur = fournisseurService.retrieveFournisseur(createFournisseur().getIdFournisseur());
         Assert.assertNotNull(retrievedFournisseur);
     }
 
     @Test
      void testUpdateFournisseur() {
-        Fournisseur persistedFournisseur = testAddFournisseur();
+        Fournisseur persistedFournisseur = createFournisseur();
         persistedFournisseur.getDetailFournisseur().setAdresse("Nouvelle adresse");
         Fournisseur updatedFournisseur = fournisseurService.updateFournisseur(persistedFournisseur);
         Assert.assertEquals(persistedFournisseur.getDetailFournisseur().getAdresse(), updatedFournisseur.getDetailFournisseur().getAdresse());
@@ -63,7 +74,7 @@ import java.util.Optional;
 
     @Test
      void testDeleteFournisseur() {
-        Fournisseur persistedFournisseur = testAddFournisseur();
+        Fournisseur persistedFournisseur = createFournisseur();
         fournisseurService.deleteFournisseur(persistedFournisseur.getIdFournisseur());
         Optional<Fournisseur> deletedFournisseur = Optional.ofNullable(fournisseurService.retrieveFournisseur(persistedFournisseur.getIdFournisseur()));
         Assert.assertFalse(deletedFournisseur.isPresent());
